@@ -42,28 +42,36 @@
 		else {
 			$generalMessage="The current path cannot be null !";
 			$messageClass = "alert-danger";
-
 		}
 	}
 
 	if(isset($_POST["createDir"])) {
 		if(isset($_POST["dirName"]) && $_POST["dirName"] != '')
 		{
-			$currentCommand = "{$CREATE_DIR_COMMAND} {$_POST['currenPath']}/{$_POST['dirName']}";
-			
-			echo "{$currentCommand} <br/>";
-			$salida = exec($currentCommand);
-			echo "<pre>$salida</pre>";
-
-			echo "<div class='alert alert-success'>directory created. <br/></div>";
-			// $message = "directory created.. ";
-			// $messageClass="alert-success";
+			$directoryName=trim("/var/www/html/LinuxFileManager/").trim($_POST['dirName']);
+			if (!file_exists($directoryName))
+			{
+				if(mkdir($directoryName,0777))
+				{
+					$generalMessage="The directory was created.";
+					$messageClass = "alert-success";
+				}
+				else 
+				{
+					$generalMessage="The directory wasn't created";
+					$messageClass = "alert-danger";
+				}
+			}
+			else
+			{
+				$generalMessage="The directory already exists.";
+				$messageClass = "alert-danger";
+			}
 		}
 		else
 		{
-			// $message = "The directory name is required. ";
-			// $messageClass="alert-danger";
-			echo "<div class='alert alert-danger'> <br/></div>";
+			$generalMessage="The directory name is required.";
+			$messageClass = "alert-danger";
 		}
 	}
 
