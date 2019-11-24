@@ -123,9 +123,9 @@
 										<div class="card-body">
 											<h2 class="card-title">Create a file</h2>
 											<div class="form-group">
-												<label for="email" class="col-form-label">Select the file</label>
-												<input type="file" class="form-control" id="email">
-												<button type="button" class="btn btn-outline-info">Upload</button>
+												<label for="email" class="col-form-label">Set the name</label>
+												<input type="text" class="form-control" name="filName" id="filName" placeholder="File name">
+												<button type="submit" name="createFil" id="createFil" class="btn btn-outline-info" >Create</button>
 											</div>
 
 										</div>

@@ -45,10 +45,11 @@
 		}
 	}
 
+	//When we want to create a new directory
 	if(isset($_POST["createDir"])) {
 		if(isset($_POST["dirName"]) && $_POST["dirName"] != '')
 		{
-			$directoryName=trim("/var/www/html/LinuxFileManager/").trim($_POST['dirName']);
+			$directoryName=trim($_POST['currenPath'])."/".trim($_POST['dirName']);
 			if (!file_exists($directoryName))
 			{
 				if(mkdir($directoryName,0777))
@@ -70,11 +71,41 @@
 		}
 		else
 		{
-			$generalMessage="The directory name is required.";
+			$generalMessage="Directory name is required.";
 			$messageClass = "alert-danger";
 		}
 	}
 
+	//When we want to create a new file 
+	if(isset($_POST["createFil"])) {
+		if(isset($_POST["filName"]) && $_POST["filName"] != '')
+		{
+			$fileName=trim($_POST['currenPath'])."/".trim($_POST['filName']);
+			if (!file_exists($fileName))
+			{
+				if(touch($fileName))
+				{
+					$generalMessage="The file was created.";
+					$messageClass = "alert-success";
+				}
+				else 
+				{
+					$generalMessage="The file wasn't created";
+					$messageClass = "alert-danger";
+				}
+			}
+			else
+			{
+				$generalMessage="The file already exists.";
+				$messageClass = "alert-danger";
+			}
+		}
+		else
+		{
+			$generalMessage="File name is required.";
+			$messageClass = "alert-danger";
+		}
+	}
 
 	exec("dir -l " . $currentFolder,$result);
 	$tableBody = "";
