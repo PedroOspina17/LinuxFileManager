@@ -9,6 +9,11 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="main.css">
 	<script>
 
+		function rowSelected(row)
+		{
+			document.getElementById("fileName").value = row.firstElementChild.innerHTML
+			
+		}
 		$(document).ready(function () {
 			var activeSystemClass = $('.list-group-item.active');
 
@@ -152,11 +157,21 @@
 											<h2 class="card-title">Manage files</h2>
 											<div class="form-group">
 												
-												<input type="text" class="form-control" name="dirName" id="dirName" placeholder="File name">
+												<input type="text" class="form-control" name="fileName" id="fileName" placeholder="File name">
 												<div class="btn-group" role="group" aria-label="Basic example">
 													<button type="button" class="btn btn-outline-info">Delete</button>
 													<button type="button" class="btn btn-outline-info">Copy</button>
 													<button type="button" class="btn btn-outline-info ">Move</button>
+													<div class="dropdown">
+													<button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														Access rights
+													</button>
+													<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+														<a class="dropdown-item" href="#">Action</a>
+														<a class="dropdown-item" href="#">Another action</a>
+														<a class="dropdown-item" href="#">Something else here</a>
+													</div>
+													</div>
 
 												</div>
 											</div>

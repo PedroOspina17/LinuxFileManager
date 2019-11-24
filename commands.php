@@ -69,7 +69,7 @@
 			$fileName = end($fields);
 			$permissions = $fields[0];
 
-			$tableBody .= "<tr>";
+			$tableBody .= "<tr onClick='rowSelected(this)'>";
 			$tableBody .= "<td>{$fileName}</td>";
 			$tableBody .= "<td>{$permissions}</td>";
 
