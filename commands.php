@@ -11,8 +11,15 @@
 	$FILE_LIST_COMMAND = "dir -l";
 	
 	$currentCommand = "";
-	$initialized = "block";
-
+	$initialized = "";
+	if($_POST['currenPath'] != "")
+	{
+		$initialized = "none";
+	}else
+	{
+		$initialized = "block";	
+	}
+	
 	if(isset($_POST["firstLoad"])) 
 	{
 		$currentFolder = exec("pwd");
@@ -23,7 +30,7 @@
 	{
 		if( isset($_POST['currenPath']) && $_POST['currenPath'] != "")
 		{
-			echo "Actualizando ruta actual... <br/>";
+			
 			//$result = exec("{$CHANGE_PATH_COMMAND} {$_POST['currenPath']}");
 			echo exec("dir {$_POST['currenPath']}");
 			$currentFolder = $_POST['currenPath'];
