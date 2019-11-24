@@ -70,8 +70,9 @@
 	<div class="container" style="margin-top: 1em;">
 		<!-- Sign up form -->
 		<form action="commands.php" method="POST">
+			<button type="submit" name="firstLoad" id="firstLoad" class="btn btn-outline-info btn-block" style="display: <?php echo $initialized; ?>"> Init Application</button>
 			<!-- Sign up card -->
-			<div class="card person-card">
+			<div class="card person-card" style="display: <?php if($initialized == "block") {echo 'none'; } else{ echo 'block'; } ?>">
 				<div class="card-body">
 					<!-- Sex image -->
 					<div class="row  pb-5">
@@ -84,31 +85,14 @@
 								Current path:
 								<input id="currenPath" name="currenPath" type="text"
 									class="form-check-inline form-control form-control-plaintext text-muted w-50 font-italic border-info"
-									placeholder="Current path" value="~/user/pedro/testing">
+									placeholder="Current path" value='<?php echo $currentFolder?> '>
 								<button type="submit" id="changePath" name="changePath" class="btn btn-outline-info">Change</button>
 							</h6>
 
 						</div>
 					</div>
 					<div class="row">
-						<!-- First row (on medium screen) -->
-						<!-- <div class="col-6">
-							<div class="row">
 
-								<div class="form-group col-md-12">
-									<input id="first_name" type="text" class="form-control" placeholder="First name">
-									<div id="first_name_feedback" class="invalid-feedback">
-
-									</div>
-								</div>
-								<div class="form-group col-md-12">
-									<input id="last_name" type="text" class="form-control" placeholder="Last name">
-									<div id="last_name_feedback" class="invalid-feedback">
-
-									</div>
-								</div>
-							</div>
-						</div> -->
 
 						<div class="col-md-6 p-5">
 							<div class="row my-4">
@@ -154,77 +138,34 @@
 										<tr>
 											<th class="w-50">Name</th>
 											<th>Access</th>
-											<th>Actions</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>Sample.txt</td>
-											<td>-w -r -x</td>
-											<td>
-												<div class="btn-group" role="group" aria-label="Basic example">
-													<button type="button" class="btn btn-outline-info">Delete</button>
-													<button type="button" class="btn btn-outline-info">Copy</button>
-													<button type="button" class="btn btn-outline-info ">Move</button>
-
-												</div>
-
-												<input id="last_name" type="text"
-													class=" form-control form-control-plaintext text-muted font-italic border-info"
-													placeholder="New path">
-											</td>
-										</tr>
-										<tr>
-											<td>Sample.txt</td>
-											<td>-w -r -x</td>
-											<td>
-												<div class="btn-group" role="group" aria-label="Basic example">
-													<button type="button" class="btn btn-outline-info">Delete</button>
-													<button type="button" class="btn btn-outline-info">Copy</button>
-													<button type="button" class="btn btn-outline-info ">Move</button>
-
-												</div>
-
-												<input id="last_name" type="text"
-													class=" form-control form-control-plaintext text-muted font-italic border-info"
-													placeholder="New path">
-											</td>
-										</tr>
-										<tr>
-											<td>Sample.txt</td>
-											<td>-w -r -x</td>
-											<td>
-												<div class="btn-group" role="group" aria-label="Basic example">
-													<button type="button" class="btn btn-outline-info">Delete</button>
-													<button type="button" class="btn btn-outline-info">Copy</button>
-													<button type="button" class="btn btn-outline-info ">Move</button>
-
-												</div>
-
-												<input id="last_name" type="text"
-													class=" form-control form-control-plaintext text-muted font-italic border-info"
-													placeholder="New path">
-											</td>
-										</tr>
-										<tr>
-											<td>Sample.txt</td>
-											<td>-w -r -x</td>
-											<td>
-												<div class="btn-group" role="group" aria-label="Basic example">
-													<button type="button" class="btn btn-outline-info">Delete</button>
-													<button type="button" class="btn btn-outline-info">Copy</button>
-													<button type="button" class="btn btn-outline-info ">Move</button>
-
-												</div>
-
-												<input id="last_name" type="text"
-													class=" form-control form-control-plaintext text-muted font-italic border-info"
-													placeholder="New path">
-											</td>
-										</tr>
+										<?php echo $tableBody; ?>
 									</tbody>
 								</table>
 							</div>
+							<div class="row my-4">
+								<div class="col-md-12">
+									<div class="card">
+										<div class="card-body">
+											<h2 class="card-title">Manage files</h2>
+											<div class="form-group">
+												
+												<input type="text" class="form-control" name="dirName" id="dirName" placeholder="File name">
+												<div class="btn-group" role="group" aria-label="Basic example">
+													<button type="button" class="btn btn-outline-info">Delete</button>
+													<button type="button" class="btn btn-outline-info">Copy</button>
+													<button type="button" class="btn btn-outline-info ">Move</button>
+
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
 						</div>
 					</div>
 				</div>

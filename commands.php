@@ -1,7 +1,6 @@
 
 <?php
-	
-meli
+
 	$CURRENT_PATH_COMMAND = "pwd";
 	$CHANGE_PATH_COMMAND = "cd ";
 	$CREATE_DIR_COMMAND = "mkdir ";
@@ -12,11 +11,27 @@ meli
 	$FILE_LIST_COMMAND = "dir -l";
 	
 	$currentCommand = "";
+	$initialized = "block";
+
+	if(isset($_POST["firstLoad"])) 
+	{
+		$currentFolder = exec("pwd");
+		$initialized = "none";
+	}
 
 	if(isset($_POST["changePath"])) 
 	{
-		echo "Actualizando ruta actual... <br/>";
-		echo  "'{$CHANGE_PATH_COMMAND} {$_POST['currenPath']} '<br/>";
+		if( isset($_POST['currenPath']) && $_POST['currenPath'] != "")
+		{
+			echo "Actualizando ruta actual... <br/>";
+			//$result = exec("{$CHANGE_PATH_COMMAND} {$_POST['currenPath']}");
+			echo exec("dir {$_POST['currenPath']}");
+			$currentFolder = $_POST['currenPath'];
+			echo $currentFolder;
+		}
+		else {
+			echo "<div class='alert alert-danger'> <br/></div>";
+		}
 	}
 
 	if(isset($_POST["createDir"])) {
@@ -42,15 +57,41 @@ meli
 
 	
 
-	$message = "Page loaded. ";
-	$messageClass="alert-info";
+	//$message = "Page loaded. ";
+	//$messageClass="alert-info";
 	// echo "Page loaded !! <br/>";
-	// $result = exec("");
-	// echo $result;
-	// echo $FILE_LIST_COMMAND . "<br/>";
-	// echo $CURRENT_PATH_COMMAND."<br/>";
+
+	exec("dir -l " . $currentFolder,$result);
+	$tableBody = "";
+
+	for ($i=0; $i < count($result); $i++) { 
+
+		$fields = explode(' ', $result[$i]);
+		if(count($fields) > 4)
+		{
+			$fileName = end($fields);
+			$permissions = $fields[0];
+
+			$tableBody .= "<tr>";
+			$tableBody .= "<td>{$fileName}</td>";
+			$tableBody .= "<td>{$permissions}</td>";
+
+			$tableBody .= "</tr>";
+
+
+
+		}
+		
+		
+	}
+	
+	//$tableBody .= "</tBody>";
 
 	
-
+	 //echo $currentFolder;
+	// echo $FILE_LIST_COMMAND . "<br/>";
+	// echo $CURRENT_PATH_COMMAND."<br/>";
+	
+	
 	include("index.php");
 ?>
