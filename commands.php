@@ -15,7 +15,7 @@
 	$messageClass = "";
 	$generalMessage = "";
 	$initialized = "";
-	if($_POST['currenPath'] != "")
+	if(isset($_POST['currenPath']) && $_POST['currenPath'] != "")
 	{
 		$initialized = "none";
 	}else
