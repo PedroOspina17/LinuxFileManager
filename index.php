@@ -63,7 +63,7 @@
 	<div style="margin: 15px;" class='alert <?php echo $messageClass?>'>
 		<?php
 		
-		echo $message;
+		echo $generalMessage;
 
 		?>
 	</div>
