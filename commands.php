@@ -11,28 +11,38 @@
 	$FILE_LIST_COMMAND = "dir -l";
 	
 	$currentCommand = "";
-	$initialized = "block";
 	$currentFolder = "";
-	$messageClass = "alert-info";
-	$generalMessage = "Welcome to our amazing file manager !!!";
+	$messageClass = "";
+	$generalMessage = "";
+	$initialized = "";
+	if($_POST['currenPath'] != "")
+	{
+		$initialized = "none";
+	}else
+	{
+		$initialized = "block";	
+	}
+	
 	if(isset($_POST["firstLoad"])) 
 	{
 		$currentFolder = exec("pwd");
 		$initialized = "none";
+		$generalMessage = "Welcome to our amazing file manager !!!";
+		$messageClass = "alert-info";
 	}
 
 	if(isset($_POST["changePath"])) 
 	{
 		if( isset($_POST['currenPath']) && $_POST['currenPath'] != "")
 		{
-			echo "Actualizando ruta actual... <br/>";
-			//$result = exec("{$CHANGE_PATH_COMMAND} {$_POST['currenPath']}");
-			echo exec("dir {$_POST['currenPath']}");
+			$generalMessage="The current path was changed !";
+			$messageClass = "alert-info";
 			$currentFolder = $_POST['currenPath'];
-			echo $currentFolder;
 		}
 		else {
-			echo "<div class='alert alert-danger'> <br/></div>";
+			$generalMessage="The current path cannot be null !";
+			$messageClass = "alert-danger";
+
 		}
 	}
 
