@@ -12,7 +12,9 @@
 	
 	$currentCommand = "";
 	$initialized = "block";
-
+	$currentFolder = "";
+	$messageClass = "alert-info";
+	$generalMessage = "Welcome to our amazing file manager !!!";
 	if(isset($_POST["firstLoad"])) 
 	{
 		$currentFolder = exec("pwd");
@@ -55,11 +57,6 @@
 		}
 	}
 
-	
-
-	//$message = "Page loaded. ";
-	//$messageClass="alert-info";
-	// echo "Page loaded !! <br/>";
 
 	exec("dir -l " . $currentFolder,$result);
 	$tableBody = "";
