@@ -62,6 +62,7 @@
 		id="bootstrap-css">
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 </head>
 
 <body>
@@ -156,24 +157,22 @@
 										<div class="card-body">
 											<h2 class="card-title">Manage files</h2>
 											<div class="form-group">
-												
-												<input type="text" class="form-control" name="fileName" id="fileName" placeholder="File name">
+												<span>Selected file: </span>
+												<input type="text" class="form-control" name="fileName" id="fileName" disabled placeholder="File name">
+												<span>New file path and name: </span>
+												<input type="text" class="form-control" name="fileNewName" id="fileNewName" placeholder="New file name" value='<?php echo $currentFolder?> '>
 												<div class="btn-group" role="group" aria-label="Basic example">
 													<button type="button" class="btn btn-outline-info">Delete</button>
 													<button type="button" class="btn btn-outline-info">Copy</button>
 													<button type="button" class="btn btn-outline-info ">Move</button>
-													<div class="dropdown">
-													<button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-														Access rights
-													</button>
-													<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-														<a class="dropdown-item" href="#">Read (-r)</a>
-														<a class="dropdown-item" href="#">Another action</a>
-														<a class="dropdown-item" href="#">Something else here</a>
-													</div>
-													</div>
-
 												</div>
+
+												<div class="btn-group" role="group" aria-label="Basic example">
+													<button type="button" class="btn btn-outline-info">Read</button>
+													<button type="button" class="btn btn-outline-info">Write</button>
+													<button type="button" class="btn btn-outline-info ">Create</button>
+												</div>
+												
 											</div>
 
 										</div>
