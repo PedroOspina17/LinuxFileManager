@@ -49,7 +49,7 @@
 	if(isset($_POST["createDir"])) {
 		if(isset($_POST["dirName"]) && $_POST["dirName"] != '')
 		{
-			$directoryName=trim($_POST['currenPath'])."/".trim($_POST['dirName']);
+			$directoryName=trim($_currentFolder)."/".trim($_POST['dirName']);
 			if (!file_exists($directoryName))
 			{
 				if(mkdir($directoryName,0777))
@@ -80,7 +80,7 @@
 	if(isset($_POST["createFil"])) {
 		if(isset($_POST["filName"]) && $_POST["filName"] != '')
 		{
-			$fileName=trim($_POST['currenPath'])."/".trim($_POST['filName']);
+			$fileName=trim($currentFolder)."/".trim($_POST['filName']);
 			if (!file_exists($fileName))
 			{
 				if(touch($fileName))
