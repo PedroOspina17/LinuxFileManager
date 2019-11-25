@@ -11,7 +11,7 @@
 
 		function rowSelected(row)
 		{
-			document.getElementById("fileName").value = row.firstElementChild.innerHTML
+			document.getElementById("selectedFileName").value = row.firstElementChild.innerHTML
 			
 		}
 		$(document).ready(function () {
@@ -91,7 +91,7 @@
 								Current path:
 								<input id="currenPath" name="currenPath" type="text"
 									class="form-check-inline form-control form-control-plaintext text-muted w-50 font-italic border-info"
-									placeholder="Current path" value='<?php echo $currentFolder?> '>
+									placeholder="Current path" value='<?php echo $currentFolder?>'>
 								<button type="submit" id="changePath" name="changePath" class="btn btn-outline-info">Change</button>
 							</h6>
 
@@ -158,13 +158,13 @@
 											<h2 class="card-title">Manage files</h2>
 											<div class="form-group">
 												<span>Selected file: </span>
-												<input type="text" class="form-control" name="fileName" id="fileName" disabled placeholder="File name">
+												<input type="text" class="form-control" name="selectedFileName" id="selectedFileName" readonly placeholder="File name" value='<?php echo $selectedFileName; ?> '>
 												<span>New file path and name: </span>
-												<input type="text" class="form-control" name="fileNewName" id="fileNewName" placeholder="New file name" value='<?php echo $currentFolder?> '>
+												<input type="text" class="form-control" name="fileNewName" id="fileNewName" placeholder="New file name" value='<?php echo $currentFolder; ?>'>
 												<div class="btn-group" role="group" aria-label="Basic example">
-													<button type="button" class="btn btn-outline-info">Delete</button>
-													<button type="button" class="btn btn-outline-info">Copy</button>
-													<button type="button" class="btn btn-outline-info ">Move</button>
+													<button type="submit" id="btnDelete" name="btnDelete" class="btn btn-outline-info">Delete</button>
+													<button type="submit" id="btnCopy" name="btnCopy" class="btn btn-outline-info">Copy</button>
+													<button type="submit" id="btnMove" name="btnMove" class="btn btn-outline-info ">Move</button>
 												</div>
 
 												<div class="btn-group" role="group" aria-label="Basic example">

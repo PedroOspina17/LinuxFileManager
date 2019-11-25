@@ -1,6 +1,12 @@
 
 <?php
 
+
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+ini_set('error_reporting', E_ALL);
+
 	$CURRENT_PATH_COMMAND = "pwd";
 	$CHANGE_PATH_COMMAND = "cd ";
 	$CREATE_DIR_COMMAND = "mkdir ";
@@ -10,16 +16,20 @@
 	$MOVE_FILE_COMMAND = "cv ";
 	$FILE_LIST_COMMAND = "dir -l";
 	
+	var_dump($_POST);
+
 	$currentCommand = "";
 	$currentFolder = "";
 	$messageClass = "";
 	$generalMessage = "";
 	$initialized = "";
+	$selectedFileName = "";
 	if(isset($_POST['currenPath']) && $_POST['currenPath'] != "")
 	{
+		$currentFolder = $_POST['currenPath'];
 		$initialized = "none";
 	}else
-	{
+	{		
 		$initialized = "block";	
 	}
 	
@@ -45,6 +55,83 @@
 
 		}
 	}
+
+
+	if(isset($_POST["btnDelete"])) 
+	{
+		if( isset($_POST['selectedFileName']) && $_POST['selectedFileName'] != "")
+		{
+			echo "'rm " . $currentFolder . "/" . $_POST['selectedFileName']."'";
+			echo  exec("sudo rm " . $currentFolder . "/" . $_POST['selectedFileName'],$test);
+			var_dump($test);
+			$selectedFileName = "";
+			$generalMessage="The file selected was deleted !";
+			$messageClass = "alert-info";
+			
+			
+		}else
+		{
+			$generalMessage="One file needs to be selected!";
+			$messageClass = "alert-danger";
+		}
+	}
+
+	if(isset($_POST["btnCopy"])) 
+	{
+		if( isset($_POST['selectedFileName']) && $_POST['selectedFileName'] != "")
+		{
+			if(isset($_POST['fileNewName']) && $_POST['fileNewName'] != "")
+			{
+				exec("cp {$currentFolder}/{$_POST['selectedFileName']} {$_POST['fileNewName']}");
+				$selectedFileName = "";
+				$generalMessage="The file selected was copied !";
+				$messageClass = "alert-info";
+			}
+			else {
+				$generalMessage="The new path file cannot be null or empty !";
+				$messageClass = "alert-danger";
+
+			}
+		}else
+		{
+			$generalMessage="One file needs to be selected!";
+			$messageClass = "alert-danger";
+		}
+	}
+
+	if(isset($_POST["btnMove"])) 
+	{
+		if( isset($_POST['selectedFileName']) && $_POST['selectedFileName'] != "")
+		{
+			if(isset($_POST['fileNewName']) && $_POST['fileNewName'] != "")
+			{
+				exec("mv {$currentFolder}/{$_POST['selectedFileName']} {$_POST['fileNewName']}");
+				$selectedFileName = "";
+				$generalMessage="The file selected was moved !";
+				$messageClass = "alert-info";
+			}
+			else {
+				$generalMessage="The current path cannot be null !";
+				$messageClass = "alert-danger";
+
+			}
+		}else
+		{
+			$generalMessage="One file needs to be selected!";
+			$messageClass = "alert-danger";
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 	if(isset($_POST["createDir"])) {
 		if(isset($_POST["dirName"]) && $_POST["dirName"] != '')
