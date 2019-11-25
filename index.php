@@ -176,8 +176,8 @@
 												</div>
 
 												<div class="btn-group" role="group" aria-label="Basic example">
-													<button type="button" class="btn btn-outline-info">Change permissions</button>
-													<button type="button" class="btn btn-outline-info">Change owner</button>
+													<button type="submit" id="btnPerm" name="btnPerm" class="btn btn-outline-info">Change permissions</button>
+													<button type="submit" id="btnNewOw" name="btnNewOw" class="btn btn-outline-info">Change owner</button>
 												</div>
 												
 											</div>

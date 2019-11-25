@@ -97,7 +97,7 @@ ini_set('error_reporting', E_ALL);
 			$messageClass = "alert-danger";
 		}
 	}
-
+	
 	if(isset($_POST["btnMove"])) 
 	{
 		if( isset($_POST['selectedFileName']) && $_POST['selectedFileName'] != "")
@@ -121,6 +121,49 @@ ini_set('error_reporting', E_ALL);
 		}
 	}
 
+	// When we want to change user permissions
+	if(isset($_POST["btnPerm"])) 
+	{
+		if(isset($_POST["selectedFileName"]) && trim($_POST["selectedFileName"]) != '')
+		{
+			if(isset($_POST["userPerm"]) && $_POST["userPerm"] != '')
+			{
+				
+			}
+			else
+			{
+				$generalMessage="You have to write the new usser permissions.";
+				$messageClass = "alert-danger";
+			}
+		}
+		else
+		{
+			$generalMessage="One file needs to be selected!";
+			$messageClass = "alert-danger";
+		}
+	}
+
+	//When we want to change the owner 
+	if(isset($_POST["btnNewOw"])) 
+	{
+		if(isset($_POST["selectedFileName"]) && trim($_POST["selectedFileName"]) != '')
+		{
+			if(isset($_POST["newOw"]) && $_POST["newOw"] != '')
+			{
+				
+			}
+			else
+			{
+				$generalMessage="You have to write who is the new owner.";
+				$messageClass = "alert-danger";
+			}
+		}
+		else
+		{
+			$generalMessage="One file needs to be selected!";
+			$messageClass = "alert-danger";
+		}
+	}
 
 	if(isset($_POST["createDir"])) {
 		if(isset($_POST["dirName"]) && $_POST["dirName"] != '')
