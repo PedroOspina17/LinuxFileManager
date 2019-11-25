@@ -52,7 +52,6 @@ ini_set('error_reporting', E_ALL);
 		else {
 			$generalMessage="The current path cannot be null !";
 			$messageClass = "alert-danger";
-
 		}
 	}
 
@@ -123,37 +122,66 @@ ini_set('error_reporting', E_ALL);
 	}
 
 
-
-
-
-
-
-
-
-
-
-
 	if(isset($_POST["createDir"])) {
 		if(isset($_POST["dirName"]) && $_POST["dirName"] != '')
 		{
-			$currentCommand = "{$CREATE_DIR_COMMAND} {$_POST['currenPath']}/{$_POST['dirName']}";
-			
-			echo "{$currentCommand} <br/>";
-			$salida = exec($currentCommand);
-			echo "<pre>$salida</pre>";
-
-			echo "<div class='alert alert-success'>directory created. <br/></div>";
-			// $message = "directory created.. ";
-			// $messageClass="alert-success";
+			$directoryName=trim($_currentFolder)."/".trim($_POST['dirName']);
+			if (!file_exists($directoryName))
+			{
+				if(mkdir($directoryName,0777))
+				{
+					$generalMessage="The directory was created.";
+					$messageClass = "alert-success";
+				}
+				else 
+				{
+					$generalMessage="The directory wasn't created";
+					$messageClass = "alert-danger";
+				}
+			}
+			else
+			{
+				$generalMessage="The directory already exists.";
+				$messageClass = "alert-danger";
+			}
 		}
 		else
 		{
-			// $message = "The directory name is required. ";
-			// $messageClass="alert-danger";
-			echo "<div class='alert alert-danger'> <br/></div>";
+			$generalMessage="Directory name is required.";
+			$messageClass = "alert-danger";
 		}
 	}
 
+	//When we want to create a new file 
+	if(isset($_POST["createFil"])) {
+		if(isset($_POST["filName"]) && $_POST["filName"] != '')
+		{
+			$fileName=trim($currentFolder)."/".trim($_POST['filName']);
+			if (!file_exists($fileName))
+			{
+				if(touch($fileName))
+				{
+					$generalMessage="The file was created.";
+					$messageClass = "alert-success";
+				}
+				else 
+				{
+					$generalMessage="The file wasn't created";
+					$messageClass = "alert-danger";
+				}
+			}
+			else
+			{
+				$generalMessage="The file already exists.";
+				$messageClass = "alert-danger";
+			}
+		}
+		else
+		{
+			$generalMessage="File name is required.";
+			$messageClass = "alert-danger";
+		}
+	}
 
 	exec("dir -l " . $currentFolder,$result);
 	$tableBody = "";
