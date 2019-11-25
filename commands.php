@@ -16,7 +16,7 @@ ini_set('error_reporting', E_ALL);
 	$MOVE_FILE_COMMAND = "cv ";
 	$FILE_LIST_COMMAND = "dir -l";
 	
-	var_dump($_POST);
+	//var_dump($_POST);
 
 	$currentCommand = "";
 	$currentFolder = "";
@@ -35,7 +35,7 @@ ini_set('error_reporting', E_ALL);
 	
 	if(isset($_POST["firstLoad"])) 
 	{
-		$currentFolder = exec("pwd");
+		$currentFolder = exec("pwd")."/";
 		$initialized = "none";
 		$generalMessage = "Welcome to our amazing file manager !!!";
 		$messageClass = "alert-info";
@@ -125,7 +125,7 @@ ini_set('error_reporting', E_ALL);
 	if(isset($_POST["createDir"])) {
 		if(isset($_POST["dirName"]) && $_POST["dirName"] != '')
 		{
-			$directoryName=trim($_currentFolder)."/".trim($_POST['dirName']);
+			$directoryName=trim($currentFolder).trim($_POST['dirName']);
 			if (!file_exists($directoryName))
 			{
 				if(mkdir($directoryName,0777))
@@ -156,7 +156,7 @@ ini_set('error_reporting', E_ALL);
 	if(isset($_POST["createFil"])) {
 		if(isset($_POST["filName"]) && $_POST["filName"] != '')
 		{
-			$fileName=trim($currentFolder)."/".trim($_POST['filName']);
+			$fileName=trim($currentFolder).trim($_POST['filName']);
 			if (!file_exists($fileName))
 			{
 				if(touch($fileName))

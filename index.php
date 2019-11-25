@@ -161,6 +161,14 @@
 												<input type="text" class="form-control" name="selectedFileName" id="selectedFileName" readonly placeholder="File name" value='<?php echo $selectedFileName; ?> '>
 												<span>New file path and name: </span>
 												<input type="text" class="form-control" name="fileNewName" id="fileNewName" placeholder="New file name" value='<?php echo $currentFolder; ?>'>
+
+												<br>
+												<span>Set permissions: </span>
+												<input type="text" class="form-control" name="userPerm" id="userPerm" placeholder="Permissions">
+												<br>
+												<span>Set new owner: </span>
+												<input type="text" class="form-control" name="newOw" id="userPerm" placeholder="New owner">
+
 												<div class="btn-group" role="group" aria-label="Basic example">
 													<button type="submit" id="btnDelete" name="btnDelete" class="btn btn-outline-info">Delete</button>
 													<button type="submit" id="btnCopy" name="btnCopy" class="btn btn-outline-info">Copy</button>
@@ -168,9 +176,8 @@
 												</div>
 
 												<div class="btn-group" role="group" aria-label="Basic example">
-													<button type="button" class="btn btn-outline-info">Read</button>
-													<button type="button" class="btn btn-outline-info">Write</button>
-													<button type="button" class="btn btn-outline-info ">Create</button>
+													<button type="button" class="btn btn-outline-info">Change permissions</button>
+													<button type="button" class="btn btn-outline-info">Change owner</button>
 												</div>
 												
 											</div>
