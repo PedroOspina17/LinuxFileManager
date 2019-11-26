@@ -172,7 +172,7 @@
 												<span>New filen name: </span>
 												<input type="text" class="form-control" name="newFileName" id="newFileName"  placeholder="New file name" >
 
-												<span>New file path and name: </span>
+												<span>New file path: </span>
 												<input type="text" class="form-control" name="fileNewName" id="fileNewName" placeholder="New file name" value='<?php echo $currentFolder; ?>'>
 
 												<br>
