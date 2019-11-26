@@ -43,11 +43,21 @@ ini_set('error_reporting', E_ALL);
 
 	if(isset($_POST["changePath"])) 
 	{
+
 		if( isset($_POST['currenPath']) && $_POST['currenPath'] != "")
 		{
-			$generalMessage="The current path was changed !";
-			$messageClass = "alert-info";
-			$currentFolder = $_POST['currenPath'];
+			if(file_exists($_POST['currenPath']))
+			{
+				$generalMessage="The current path was changed !";
+				$messageClass = "alert-info";
+				$currentFolder = $_POST['currenPath']."/";
+			}
+			else{
+				$generalMessage="Please choose a correct directory. Init the app again.";
+				$messageClass = "alert-danger";
+				$currentFolder = "";
+				$initialized = "block";	
+			}
 		}
 		else {
 			$generalMessage="The current path cannot be null !";
@@ -58,30 +68,55 @@ ini_set('error_reporting', E_ALL);
 
 	if(isset($_POST["btnDelete"])) 
 	{
-		if( isset($_POST['selectedFileName']) && $_POST['selectedFileName'] != "")
+		if(!(isset($_POST["selectedFileName"]) && trim($_POST["selectedFileName"]) != ''))
 		{
-			echo "'rm " . $currentFolder . "/" . $_POST['selectedFileName']."'";
-			echo  exec("sudo rm " . $currentFolder . "/" . $_POST['selectedFileName'],$test);
-			var_dump($test);
-			$selectedFileName = "";
-			$generalMessage="The file selected was deleted !";
-			$messageClass = "alert-info";
-			
-			
-		}else
-		{
-			$generalMessage="One file needs to be selected!";
+			$generalMessage="The file should be selected !";
 			$messageClass = "alert-danger";
+		}
+		else
+		{
+			$path = $currentFolder . $_POST['selectedFileName'];
+				error_reporting(E_ALL);
+				set_error_handler(function()
+					{
+						throw new Exception("Error");
+					});
+				$isDir = is_dir($path);
+
+			if(delete_files($path))
+			{
+				if($isDir)
+				{
+					$generalMessage="The directory selected was deleted !";
+				}else{
+					$generalMessage="The file selected was deleted !";
+				}
+				$selectedFileName = "";
+				
+				$messageClass = "alert-info";	
+			}
+			else{
+				$selectedFileName = "";
+				$generalMessage="The file couldn't be deleted !";
+				$messageClass = "alert-danger";	
+			}			
 		}
 	}
 
 	if(isset($_POST["btnCopy"])) 
 	{
-		if( isset($_POST['selectedFileName']) && $_POST['selectedFileName'] != "")
+		if(!(isset($_POST["selectedFileName"]) && trim($_POST["selectedFileName"]) != ''))
+		{
+			$generalMessage="The file should be selected !";
+			$messageClass = "alert-danger";
+		}
+		else
 		{
 			if(isset($_POST['fileNewName']) && $_POST['fileNewName'] != "")
 			{
-				exec("cp {$currentFolder}/{$_POST['selectedFileName']} {$_POST['fileNewName']}");
+
+				$newPath = $_POST['fileNewName'] ."/". $_POST['newFileName'];
+				exec("cp {$currentFolder}/{$_POST['selectedFileName']} {$newPath}");
 				$selectedFileName = "";
 				$generalMessage="The file selected was copied !";
 				$messageClass = "alert-info";
@@ -91,33 +126,40 @@ ini_set('error_reporting', E_ALL);
 				$messageClass = "alert-danger";
 
 			}
-		}else
-		{
-			$generalMessage="One file needs to be selected!";
-			$messageClass = "alert-danger";
 		}
 	}
 	
 	if(isset($_POST["btnMove"])) 
 	{
-		if( isset($_POST['selectedFileName']) && $_POST['selectedFileName'] != "")
+		if(!(isset($_POST["selectedFileName"]) && trim($_POST["selectedFileName"]) != ''))
 		{
-			if(isset($_POST['fileNewName']) && $_POST['fileNewName'] != "")
-			{
-				exec("mv {$currentFolder}/{$_POST['selectedFileName']} {$_POST['fileNewName']}");
-				$selectedFileName = "";
-				$generalMessage="The file selected was moved !";
-				$messageClass = "alert-info";
-			}
-			else {
-				$generalMessage="The current path cannot be null !";
-				$messageClass = "alert-danger";
-
-			}
-		}else
-		{
-			$generalMessage="One file needs to be selected!";
+			$generalMessage="The file should be selected !";
 			$messageClass = "alert-danger";
+		}
+		else
+		{
+			
+			
+			if( isset($_POST['selectedFileName']) && $_POST['selectedFileName'] != "")
+			{
+				if(isset($_POST['fileNewName']) && $_POST['fileNewName'] != "")
+				{
+					$newPath = $_POST['fileNewName'] ."/". $_POST['newFileName'];
+					exec("mv {$currentFolder}/{$_POST['selectedFileName']} {$newPath}");
+					$selectedFileName = "";
+					$generalMessage="The file selected was moved !";
+					$messageClass = "alert-info";
+				}
+				else {
+					$generalMessage="The current path cannot be null !";
+					$messageClass = "alert-danger";
+
+				}
+			}else
+			{
+				$generalMessage="The file should be selected !";
+				$messageClass = "alert-danger";
+			}
 		}
 	}
 
@@ -144,7 +186,7 @@ ini_set('error_reporting', E_ALL);
 					}
 					else 
 					{
-						$generalMessage="Permissions weren't changed.";
+						$generalMessage="Permissions weren't changed. Try it later.";
 						$messageClass = "alert-danger";
 					}
 				}
@@ -163,7 +205,7 @@ ini_set('error_reporting', E_ALL);
 		}
 		else
 		{
-			$generalMessage="One file needs to be selected!";
+			$generalMessage="The file should be selected !";
 			$messageClass = "alert-danger";
 		}
 	}
@@ -196,7 +238,7 @@ ini_set('error_reporting', E_ALL);
 		}
 		else
 		{
-			$generalMessage="One file needs to be selected!";
+			$generalMessage="The file should be selected !";
 			$messageClass = "alert-danger";
 		}
 	}
@@ -284,6 +326,28 @@ ini_set('error_reporting', E_ALL);
 		}
 		
 		
+	}
+
+
+	function delete_files($target) {
+		$result = false;
+	    if(is_dir($target)){
+	        $files = glob( $target . '*', GLOB_MARK ); //GLOB_MARK adds a slash to directories returned
+
+	        foreach( $files as $file ){
+	            $result = delete_files( $file );      
+	        }
+
+			try {
+			    $result =rmdir( $target );
+			} catch (Exception $e) {
+			}
+	        
+	        	
+	    } elseif(is_file($target)) {
+	        $result = unlink( $target );  
+	    }
+	    return $result;
 	}
 	
 	//$tableBody .= "</tBody>";

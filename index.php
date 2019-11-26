@@ -11,7 +11,16 @@
 
 		function rowSelected(row)
 		{
-			document.getElementById("selectedFileName").value = row.firstElementChild.innerHTML
+			
+			if(document.getElementsByClassName("table-active").length > 0)
+				{
+					document.getElementsByClassName("table-active")[0].classList = [];
+				}
+			document.getElementsByClassName("table-active").classList = [];
+			document.getElementById("selectedFileName").value = row.firstElementChild.innerHTML;
+			document.getElementById("newFileName").value = row.firstElementChild.innerHTML;
+			
+			row.classList.add("table-active");
 			
 		}
 		$(document).ready(function () {
@@ -82,10 +91,10 @@
 				<div class="card-body">
 					<!-- Sex image -->
 					<div class="row  pb-5">
-						<div class="col-7">
+						<div class="col-4">
 							<h2 id="who_message" class="card-title ">Linux file manager</h2>
 						</div>
-						<div class="col-5">
+						<div class="col-8">
 
 							<h6 class="text-right">
 								Current path:
@@ -139,7 +148,7 @@
 							<div class="row pr-4">
 
 								<h4 id="who_message" class="card-title mx-auto">Current path file list</h4>
-								<table class="table table-list-search">
+								<table class="table table-list-search table-hover">
 									<thead>
 										<tr>
 											<th class="w-50">Name</th>
@@ -159,6 +168,10 @@
 											<div class="form-group">
 												<span>Selected file: </span>
 												<input type="text" class="form-control" name="selectedFileName" id="selectedFileName" readonly placeholder="File name" value='<?php echo $selectedFileName; ?> '>
+
+												<span>New filen name: </span>
+												<input type="text" class="form-control" name="newFileName" id="newFileName"  placeholder="New file name" >
+
 												<span>New file path and name: </span>
 												<input type="text" class="form-control" name="fileNewName" id="fileNewName" placeholder="New file name" value='<?php echo $currentFolder; ?>'>
 
