@@ -128,11 +128,22 @@ ini_set('error_reporting', E_ALL);
 		{
 			if(isset($_POST["userPerm"]) && $_POST["userPerm"] != '')
 			{
-				
+				$folderPerm =trim($currentFolder).'/'.trim($_POST['selectedFileName']);
+				$perm = (int) $_POST['userPerm'];
+				if(chmod($folderPerm,$perm))
+				{
+					$generalMessage="Permissions were changed.";
+					$messageClass = "alert-success";
+				}
+				else 
+				{
+					$generalMessage="Permissions weren't changed.";
+					$messageClass = "alert-danger";
+				}
 			}
 			else
 			{
-				$generalMessage="You have to write the new usser permissions.";
+				$generalMessage="You have to write the permissions.";
 				$messageClass = "alert-danger";
 			}
 		}
@@ -168,7 +179,7 @@ ini_set('error_reporting', E_ALL);
 	if(isset($_POST["createDir"])) {
 		if(isset($_POST["dirName"]) && $_POST["dirName"] != '')
 		{
-			$directoryName=trim($currentFolder).trim($_POST['dirName']);
+			$directoryName=trim($currentFolder).'/'.trim($_POST['dirName']);
 			if (!file_exists($directoryName))
 			{
 				if(mkdir($directoryName,0777))
@@ -199,7 +210,7 @@ ini_set('error_reporting', E_ALL);
 	if(isset($_POST["createFil"])) {
 		if(isset($_POST["filName"]) && $_POST["filName"] != '')
 		{
-			$fileName=trim($currentFolder).trim($_POST['filName']);
+			$fileName=trim($currentFolder).'/'.trim($_POST['filName']);
 			if (!file_exists($fileName))
 			{
 				if(touch($fileName))
