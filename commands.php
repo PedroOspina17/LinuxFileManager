@@ -127,19 +127,33 @@ ini_set('error_reporting', E_ALL);
 		if(isset($_POST["selectedFileName"]) && trim($_POST["selectedFileName"]) != '')
 		{
 			if(isset($_POST["userPerm"]) && $_POST["userPerm"] != '')
-			{
-				$folderPerm =trim($currentFolder).'/'.trim($_POST['selectedFileName']);
-				$perm = (int) $_POST['userPerm'];
-				if(chmod($folderPerm,$perm))
-				{
-					$generalMessage="Permissions were changed.";
-					$messageClass = "alert-success";
+			{	
+				error_reporting(E_ALL);
+				set_error_handler(function()
+					{
+						throw new Exception("Error");
+					});
+				try
+				{	
+					$folderPerm =trim($currentFolder).'/'.trim($_POST['selectedFileName']);
+					$perm = (int) $_POST['userPerm'];
+					if(chmod($folderPerm,$perm))
+					{
+						$generalMessage="Permissions were changed.";
+						$messageClass = "alert-success";
+					}
+					else 
+					{
+						$generalMessage="Permissions weren't changed.";
+						$messageClass = "alert-danger";
+					}
 				}
-				else 
+				catch (Exception $e)
 				{
-					$generalMessage="Permissions weren't changed.";
-					$messageClass = "alert-danger";
+						$generalMessage="You aren't the owner.";
+						$messageClass = "alert-danger";
 				}
+				restore_error_handler();
 			}
 			else
 			{
@@ -161,7 +175,18 @@ ini_set('error_reporting', E_ALL);
 		{
 			if(isset($_POST["newOw"]) && $_POST["newOw"] != '')
 			{
-				
+				$folderN =trim($currentFolder).'/'.trim($_POST['selectedFileName']);
+				$userN = $_POST['newOw'];
+				/*if(chown($folderN,$userN))
+				{
+					$generalMessage="Owner was changed.";
+					$messageClass = "alert-success";
+				}
+				else 
+				{
+					$generalMessage="Owner wasn't changed.";
+					$messageClass = "alert-danger";
+				}*/
 			}
 			else
 			{
