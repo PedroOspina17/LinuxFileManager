@@ -77,7 +77,7 @@ public class Banco {
     //PUNTO 1: Método que permita retirar dinero
     public String retirarDinero(int codigoNumerico,double valor)
     {
-        String resultado="No fue posible realizar la consignación.";
+        String resultado="No fue posible realizar el retiro.";
         NodoBinario cuentaRetiro = obtenerCuenta(raiz,codigoNumerico,false);
         if(cuentaRetiro != null)
         {
@@ -128,7 +128,16 @@ public class Banco {
     
     private double promedioCuentas()
     {
-        return retornarTotal() / contarNodos();
+        int totalNodos = contarNodos();
+        if(totalNodos > 0)
+        {        
+            return retornarTotal() / totalNodos;
+        
+        }
+        else
+        {
+            return 0;
+        }
     }
     
     public int contarNodos() {
@@ -193,8 +202,8 @@ public class Banco {
     
     // Punto 2 - g
     public double promedioMujeresCuentaAhorro() {
-        Banco cuentasCorrientes = filtrarCuentasAhorros(raiz, new Banco());
-        return filtrarGenero(cuentasCorrientes.getRaiz() ,new Banco(), false).promedioCuentas();
+        Banco cuentasAhorros = filtrarCuentasAhorros(raiz, new Banco());
+        return filtrarMujeres(cuentasAhorros.getRaiz() ,new Banco()).promedioCuentas();
     }      
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
     private Banco filtrarCuentasCorrientes(NodoBinario r, Banco subArbol) {
@@ -227,18 +236,16 @@ public class Banco {
         return subArbol;
     }
     
-    private Banco filtrarGenero(NodoBinario r, Banco subArbol, boolean filtrarHombre) {
+    private Banco filtrarMujeres(NodoBinario r, Banco subArbol) {
         if (r != null) {
             CuentaBancaria cuenta = r.getCuenta();
-            if(cuenta.esHombre() == filtrarHombre)
+            if(!cuenta.esHombre())
             {
                 subArbol.agregar(cuenta);
             }
-            else{
-                subArbol.agregar(cuenta);
-            }
-            subArbol = filtrarGenero(r.getHijoDerecho(),subArbol, filtrarHombre);
-            subArbol = filtrarGenero(r.getHijoIzquierdo(),subArbol, filtrarHombre);                               
+            
+            subArbol = filtrarMujeres(r.getHijoDerecho(),subArbol);
+            subArbol = filtrarMujeres(r.getHijoIzquierdo(),subArbol);                               
         }
         return subArbol;
     }
