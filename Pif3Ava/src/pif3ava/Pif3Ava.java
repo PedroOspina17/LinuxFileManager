@@ -18,20 +18,25 @@ public class Pif3Ava {
         Banco banco = new Banco();
         
         //PUNTO 2.a: Agregar una nueva cuenta
+        
+        // Cuentas de ahorro
         //Sumatoria = 1.150.909 - Promedio ctas ahorro = 230181
+            //Mujeres
         banco.agregar("Melissa", "Córdoba", 593, 1, 200000, "mcordoba@gmail.com", 1);
         banco.agregar("Natalia", "Villegas", 188, 1, 50000, "nvillegas@gmail.com", 1);
         banco.agregar("Estefania", "Villa", 711, 1, 900000, "evilla@gmail.com", 1);
+            // hombres
         banco.agregar("Mónica", "Osorio", 895, 2, 900, "mosorio@gmail.com", 1);
         banco.agregar("Carlina", "de Villegas", 61, 2, 9, "cdevillegas@gmail.com", 1);        
         
         
+        // Cuentas corrientesss
         // Sumatoria = 1.280.000. Promedio = 320.000
+            //Hombres
         banco.agregar("José", "Betancur", 803, 1, 0, "jbetancur@gmail.com", 2);
         banco.agregar("Carlos", "Córdoba", 144, 1, 980000, "ccordoba@gmail.com", 2);
+            // hombres
         banco.agregar("Liliana", "Ceballos", 331, 2, 0, "lceballos@gmail.com", 2);
-        
-        
         banco.agregar("Santiago", "Espinosa", 177, 2, 300000, "sespinosa@gmail.com", 2);
         
         
