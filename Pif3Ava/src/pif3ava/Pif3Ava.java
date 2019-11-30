@@ -6,8 +6,8 @@
 package pif3ava;
 import modelo.Banco;
 /**
- *
- * @author Melissa
+ * Pedro Nel Ospina Graciano
+ * Melissa Córdoba Molina
  */
 public class Pif3Ava {
 
@@ -89,7 +89,7 @@ public class Pif3Ava {
         System.out.print("Al eliminar 188, el árbol queda así:");
         System.out.println();
         System.out.println();
-        banco.eliminarCuenta(593);
+        banco.eliminarCuenta(188);
         banco.mostrarArbol();
         
         System.out.println("---------------------------------------");

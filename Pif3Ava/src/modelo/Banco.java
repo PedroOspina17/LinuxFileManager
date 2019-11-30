@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 /**
- *
- * @author Melissa
+ * Pedro Nel Ospina Graciano
+ * Melissa Córdoba Molina
  */
 
 public class Banco {
@@ -313,15 +313,19 @@ public class Banco {
                 retorno = obtenerCuenta(r.getHijoIzquierdo(), numero, borrarReferencia);             
                 if(retorno != null ){
                     if(borrarReferencia && !this.nodoEliminado)
+                    {
                         r.setHijoIzquierdo(null);
                         this.nodoEliminado = true;
+                    }  
                 }else
                 {
                     retorno = obtenerCuenta(r.getHijoDerecho(), numero,borrarReferencia);
                     if(retorno != null ){
-                    if(borrarReferencia && !this.nodoEliminado)
-                        r.setHijoIzquierdo(null);
-                        this.nodoEliminado = true;
+                        if(borrarReferencia && !this.nodoEliminado)
+                        {
+                            r.setHijoDerecho(null);
+                            this.nodoEliminado = true;
+                        }
                     }
                 }
             }                        

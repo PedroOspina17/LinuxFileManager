@@ -6,8 +6,8 @@
 package modelo;
 
 /**
- *
- * @author pedro.ospina
+ * Pedro Nel Ospina Graciano
+ * Melissa Córdoba Molina
  */
 public class NodoBinario {
     private NodoBinario hijoIzquierdo;
