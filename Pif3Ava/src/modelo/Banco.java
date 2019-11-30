@@ -7,7 +7,6 @@ package modelo;
 
 import java.util.LinkedList;
 import java.util.List;
-holi
 /**
  *
  * @author Melissa
