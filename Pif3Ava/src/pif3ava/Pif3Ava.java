@@ -40,6 +40,27 @@ public class Pif3Ava {
         System.out.println("");
         
         
+        System.out.println("------- Realizar consignación de $20.000 a la cuenta 593 ------------");
+        System.out.println(banco.consignarDinero(593, 20000));
+        banco.print();
+        System.out.println("---------------------------------------");
+        System.out.println("");
+        
+        
+        System.out.println("------- Realizar retiro de $900.000 a la cuenta 803 ------------");
+        System.out.println(banco.retirarDinero(803, 900000));
+        System.out.println("---------------------------------------");
+        System.out.println("");
+        
+        
+        System.out.println("------- Realizar retiro de $1000 a la cuenta 593 ------------");
+        System.out.println(banco.retirarDinero(593, 1000));
+        banco.print();
+        System.out.println("---------------------------------------");
+        System.out.println("");
+        
+        
+        
         System.out.println("-------- Creando duplicados ------------");
         if(banco.agregar("Maria", "Rodriguez", 302, 1, 0, "mrodriguez@gmail.com", 1))
         {
@@ -109,7 +130,6 @@ public class Pif3Ava {
         System.out.println(banco.existeCuenta(111) ? "La cuenta 111 existe" : "La cuenta 111 no existe");
         System.out.println(banco.existeCuenta(188) ? "La cuenta 188 existe" : "La cuenta 188 no existe");
         System.out.println("");
-        
     }
     
 }

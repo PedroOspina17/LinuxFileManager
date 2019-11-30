@@ -7,6 +7,7 @@ package modelo;
 
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Melissa
@@ -60,6 +61,30 @@ public class Banco {
         }
     }
     
+    //PUNTO 1: Método que permita hacer consignaciones  
+    public String consignarDinero(int codigoNumerico,double valor)
+    {
+        String resultado="No fue posible realizar la consignación.";
+        NodoBinario cuentaConsignacion = obtenerCuenta(raiz,codigoNumerico,false);
+        if(cuentaConsignacion != null)
+        {
+            return cuentaConsignacion.getCuenta().consignarDinero(valor);
+        }
+        return resultado;
+    }
+    
+    
+    //PUNTO 1: Método que permita retirar dinero
+    public String retirarDinero(int codigoNumerico,double valor)
+    {
+        String resultado="No fue posible realizar la consignación.";
+        NodoBinario cuentaRetiro = obtenerCuenta(raiz,codigoNumerico,false);
+        if(cuentaRetiro != null)
+        {
+            return cuentaRetiro.getCuenta().retirarDinero(valor);
+        }
+        return resultado;
+    }
     
     public void print() {
         print(raiz);
