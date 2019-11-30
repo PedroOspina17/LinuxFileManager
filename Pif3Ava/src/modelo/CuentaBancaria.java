@@ -6,8 +6,8 @@
 package modelo;
 
 /**
- *
- * @author Melissa
+ * Pedro Nel Ospina Graciano
+ * Melissa Córdoba Molina
  */
 public class CuentaBancaria {
     
