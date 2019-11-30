@@ -21,14 +21,12 @@ public class Pif3Ava {
         
         banco.agregar("Melissa", "Córdoba", 593, 1, 200000, "mcordoba@gmail.com", 1);
         banco.agregar("Natalia", "Villegas", 188, 1, 50000, "nvillegas@gmail.com", 1);
-        banco.agregar("Estefania", "Villa", 711, 1, 900000, "evilla@gmail.com", 1);
-        banco.agregar("Mónica", "Osorio", 895, 1, 900, "mosorio@gmail.com", 1);
-        banco.agregar("Carlina", "de Villegas", 61, 1, 9, "cdevillegas@gmail.com", 1);        
-        
         banco.agregar("José", "Betancur", 803, 2, 0, "jbetancur@gmail.com", 2);
         banco.agregar("Carlos", "Córdoba", 144, 2, 980000, "ccordoba@gmail.com", 2);
         banco.agregar("Liliana", "Ceballos", 331, 2, 0, "lceballos@gmail.com", 2);
-        
+        banco.agregar("Estefania", "Villa", 711, 1, 900000, "evilla@gmail.com", 1);
+        banco.agregar("Mónica", "Osorio", 895, 1, 900, "mosorio@gmail.com", 1);
+        banco.agregar("Carlina", "de Villegas", 61, 1, 9, "cdevillegas@gmail.com", 1);        
         banco.agregar("Santiago", "Espinosa", 177, 2, 300000, "sespinosa@gmail.com", 2);
         
         
@@ -59,6 +57,32 @@ public class Pif3Ava {
         System.out.println("---------------------------------------");
         System.out.println("");
         
+        //PUNTO 2.b: Retornar el valor total de dinero almacenado en el banco 
+        System.out.println();
+        System.out.println("PUNTO 2.b: El valor total de dinero almacenado en el banco es:");
+        System.out.print(banco.retornarTotal());
+        System.out.println();
+        
+        System.out.println("---------------------------------------");
+        System.out.println("");
+        
+        
+        //PUNTO 2.c: Eliminar cuenta 
+        System.out.println();
+        System.out.println("PUNTO 2.c: Eliminar cuenta");
+        System.out.print("El árbol antes de eliminar era:");
+        System.out.println();
+        System.out.println();
+        banco.mostrarArbol();
+        System.out.println();
+        System.out.print("Al eliminar 188, el árbol queda así:");
+        System.out.println();
+        System.out.println();
+        banco.eliminarCuenta(593);
+        banco.mostrarArbol();
+        
+        System.out.println("---------------------------------------");
+        System.out.println("");
         
         
         System.out.println("-------- Creando duplicados ------------");
@@ -73,15 +97,6 @@ public class Pif3Ava {
         System.out.println("---------------------------------------");
         System.out.println("");
         
-        
-        //PUNTO 2.b: Retornar el valor total de dinero almacenado en el banco 
-        System.out.println();
-        System.out.println("PUNTO 2.b: El valor total de dinero almacenado en el banco es:");
-        System.out.print(banco.retornarTotal());
-        System.out.println();
-        
-        System.out.println("---------------------------------------");
-        System.out.println("");
         //Punto 2.d. Defina un método que retorne el saldo promedio de las cuentas de ahorros.
         
         System.out.println("");

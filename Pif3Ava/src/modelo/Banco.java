@@ -98,6 +98,18 @@ public class Banco {
         }
     }
     
+    public void mostrarArbol() {
+        mostrarArbol(raiz, "");
+    }
+    
+    private void mostrarArbol(NodoBinario r, String espacios) {
+        if (r != null) {
+            mostrarArbol(r.getHijoDerecho(), espacios + "      ");
+            System.out.println(espacios + r.getCuenta().getCodigoNumerico());
+            mostrarArbol(r.getHijoIzquierdo(), espacios + "      ");
+        }
+    }
+    
     //PUNTO 2.b: Retornar el valor total de dinero almacenado en el banco 
     public double retornarTotal()
     {
@@ -220,6 +232,57 @@ public class Banco {
         return obtenerCuenta(raiz, numero, false) != null;
         
     }
+    
+    private void concatenarArbol(NodoBinario r) {
+        if (r != null) {
+            this.agregar(r.getCuenta());
+            concatenarArbol(r.getHijoIzquierdo());    
+            concatenarArbol(r.getHijoDerecho());
+        }
+    }
+    
+    public boolean eliminarCuenta(int numero)
+    {
+        if(raiz==null)
+        {
+            return false;
+        }
+        else
+        {
+            NodoBinario nodoEliminar;
+            if(raiz.getCuenta().getCodigoNumerico()==numero)
+            {
+                nodoEliminar=raiz;
+                if(raiz.tieneHijoIzquierdo())
+                {
+                    raiz=raiz.getHijoIzquierdo();
+                }
+                else if(raiz.tieneHijoDerecho())
+                {
+                    raiz=raiz.getHijoDerecho();
+                }
+                else
+                {
+                    raiz=null;
+                    return true;
+                }
+            }
+            else
+            {
+                nodoEliminar = obtenerCuenta(raiz,numero,true);
+            }
+
+            if(nodoEliminar!=null)
+            {
+                concatenarArbol(nodoEliminar.getHijoIzquierdo());
+                concatenarArbol(nodoEliminar.getHijoDerecho());
+            }
+            return nodoEliminar!=null;
+        }
+        
+
+    }
+    
     private boolean nodoEliminado = false;
     private NodoBinario obtenerCuenta(NodoBinario r, int numero, boolean borrarReferencia ) {
         NodoBinario retorno = null;
