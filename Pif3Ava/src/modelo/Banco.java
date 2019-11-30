@@ -193,10 +193,11 @@ public class Banco {
     
     // Punto 2 - h
     public boolean existeCuenta(int numero) {
-        return obtenerCuenta(raiz, numero) != null;
+        return obtenerCuenta(raiz, numero, false) != null;
         
     }
-    private NodoBinario obtenerCuenta(NodoBinario r, int numero) {
+    private boolean nodoEliminado = false;
+    private NodoBinario obtenerCuenta(NodoBinario r, int numero, boolean borrarReferencia ) {
         NodoBinario retorno = null;
         if (r != null) {
             
@@ -204,14 +205,21 @@ public class Banco {
             if(r.getCuenta().getCodigoNumerico() == numero)        
                 retorno = r;
                        
-            if(retorno != null)
+            if(retorno == null)
             {
-                retorno = obtenerCuenta(r.getHijoIzquierdo(), numero);
-            }
-            if(retorno != null)
-            {
-                retorno = obtenerCuenta(r.getHijoDerecho(), numero);
-            }
+                retorno = obtenerCuenta(r.getHijoIzquierdo(), numero, borrarReferencia);             
+                if(retorno != null ){
+                    if(borrarReferencia && !this.nodoEliminado)
+                        r.setHijoIzquierdo(null);
+                }else
+                {
+                    retorno = obtenerCuenta(r.getHijoDerecho(), numero,borrarReferencia);
+                    if(retorno != null ){
+                    if(borrarReferencia && !this.nodoEliminado)
+                        r.setHijoIzquierdo(null);
+                    }
+                }
+            }                        
             
 
         }
