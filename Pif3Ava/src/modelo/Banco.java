@@ -67,8 +67,8 @@ public class Banco {
     
     private void print(NodoBinario r) {
         if (r != null) {
-            print(r.getHijoIzquierdo());            
             System.out.println("\n" + r.getCuenta().toString());
+            print(r.getHijoIzquierdo());            
             print(r.getHijoDerecho());
         }
     }
@@ -112,13 +112,17 @@ public class Banco {
     
     // Punto 2 - d
     public double  promedioCuentasAhorro() {
-        return filtrarTipoCuenta(raiz , new Banco(), false).promedioCuentas();
+        return filtrarCuentasAhorros(raiz , new Banco()).promedioCuentas();
     }
     
     // Punto 2 - e    
     public Banco listadoCuentasCorrientes()
     {
-        return filtrarTipoCuenta(raiz , new Banco(), true);
+        return filtrarCuentasCorrientes(raiz , new Banco());
+    }
+    public Banco listadoCuentasAhorros()
+    {
+        return filtrarCuentasAhorros(raiz , new Banco());
     }
     
     // Punto 2 - f    
@@ -152,22 +156,34 @@ public class Banco {
     
     // Punto 2 - g
     public double promedioMujeresCuentaAhorro() {
-        Banco cuentasCorrientes = filtrarTipoCuenta(raiz, new Banco(),false);
+        Banco cuentasCorrientes = filtrarCuentasAhorros(raiz, new Banco());
         return filtrarGenero(cuentasCorrientes.getRaiz() ,new Banco(), false).promedioCuentas();
     }      
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-    private Banco filtrarTipoCuenta(NodoBinario r, Banco subArbol, boolean filtrarCorriente) {
+    private Banco filtrarCuentasCorrientes(NodoBinario r, Banco subArbol) {
         if (r != null) {
             CuentaBancaria cuenta = r.getCuenta();
-            if(!cuenta.esCuentaCorriente() == filtrarCorriente)
+            if(cuenta.esCuentaCorriente())
             {
                 subArbol.agregar(cuenta);
             }
-            else{
+            subArbol = filtrarCuentasCorrientes(r.getHijoDerecho(), subArbol);
+            subArbol = filtrarCuentasCorrientes(r.getHijoIzquierdo(),subArbol);
+            
+                   
+        }
+        return subArbol;
+    }
+    
+    private Banco filtrarCuentasAhorros(NodoBinario r, Banco subArbol) {
+        if (r != null) {
+            CuentaBancaria cuenta = r.getCuenta();
+            if(cuenta.esCuentaCorriente() == false)
+            {
                 subArbol.agregar(cuenta);
             }
-            subArbol = filtrarTipoCuenta(r.getHijoDerecho(),subArbol, filtrarCorriente);
-            subArbol = filtrarTipoCuenta(r.getHijoIzquierdo(),subArbol, filtrarCorriente);
+            subArbol = filtrarCuentasAhorros(r.getHijoDerecho(), subArbol);
+            subArbol = filtrarCuentasAhorros(r.getHijoIzquierdo(),subArbol);
             
                    
         }
@@ -177,7 +193,7 @@ public class Banco {
     private Banco filtrarGenero(NodoBinario r, Banco subArbol, boolean filtrarHombre) {
         if (r != null) {
             CuentaBancaria cuenta = r.getCuenta();
-            if(!cuenta.esHombre() == filtrarHombre)
+            if(cuenta.esHombre() == filtrarHombre)
             {
                 subArbol.agregar(cuenta);
             }
@@ -210,12 +226,14 @@ public class Banco {
                 if(retorno != null ){
                     if(borrarReferencia && !this.nodoEliminado)
                         r.setHijoIzquierdo(null);
+                        this.nodoEliminado = true;
                 }else
                 {
                     retorno = obtenerCuenta(r.getHijoDerecho(), numero,borrarReferencia);
                     if(retorno != null ){
                     if(borrarReferencia && !this.nodoEliminado)
                         r.setHijoIzquierdo(null);
+                        this.nodoEliminado = true;
                     }
                 }
             }                        
