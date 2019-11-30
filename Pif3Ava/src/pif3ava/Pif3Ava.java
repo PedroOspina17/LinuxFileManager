@@ -43,11 +43,11 @@ public class Pif3Ava {
         System.out.println("-------- Creando duplicados ------------");
         if(banco.agregar("Maria", "Rodriguez", 302, 1, 0, "mrodriguez@gmail.com", 1))
         {
-            System.out.println("Cuenta creada.");
+            System.out.println("La cuenta 302 fue creada.");
         }
         if(!banco.agregar("Mónica", "Osorio", 895, 1, 900, "mosorio@gmail.com", 1))
         {
-            System.out.println("La cuenta no fue agregada, el identificador de la cuenta ya se encuentra creado.");
+            System.out.println("La cuenta 895 no fue agregada, el identificador de la cuenta ya se encuentra creado.");
         }
         System.out.println("---------------------------------------");
         System.out.println("");
