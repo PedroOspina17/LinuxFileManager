@@ -7,6 +7,7 @@ package modelo;
 
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Melissa
@@ -60,6 +61,30 @@ public class Banco {
         }
     }
     
+    //PUNTO 1: Método que permita hacer consignaciones  
+    public String consignarDinero(int codigoNumerico,double valor)
+    {
+        String resultado="No fue posible realizar la consignación.";
+        NodoBinario cuentaConsignacion = obtenerCuenta(raiz,codigoNumerico,false);
+        if(cuentaConsignacion != null)
+        {
+            return cuentaConsignacion.getCuenta().consignarDinero(valor);
+        }
+        return resultado;
+    }
+    
+    
+    //PUNTO 1: Método que permita retirar dinero
+    public String retirarDinero(int codigoNumerico,double valor)
+    {
+        String resultado="No fue posible realizar la consignación.";
+        NodoBinario cuentaRetiro = obtenerCuenta(raiz,codigoNumerico,false);
+        if(cuentaRetiro != null)
+        {
+            return cuentaRetiro.getCuenta().retirarDinero(valor);
+        }
+        return resultado;
+    }
     
     public void print() {
         print(raiz);
@@ -70,6 +95,18 @@ public class Banco {
             System.out.println("\n" + r.getCuenta().toString());
             print(r.getHijoIzquierdo());            
             print(r.getHijoDerecho());
+        }
+    }
+    
+    public void mostrarArbol() {
+        mostrarArbol(raiz, "");
+    }
+    
+    private void mostrarArbol(NodoBinario r, String espacios) {
+        if (r != null) {
+            mostrarArbol(r.getHijoDerecho(), espacios + "      ");
+            System.out.println(espacios + r.getCuenta().getCodigoNumerico());
+            mostrarArbol(r.getHijoIzquierdo(), espacios + "      ");
         }
     }
     
@@ -211,6 +248,57 @@ public class Banco {
         return obtenerCuenta(raiz, numero, false) != null;
         
     }
+    
+    private void concatenarArbol(NodoBinario r) {
+        if (r != null) {
+            this.agregar(r.getCuenta());
+            concatenarArbol(r.getHijoIzquierdo());    
+            concatenarArbol(r.getHijoDerecho());
+        }
+    }
+    
+    public boolean eliminarCuenta(int numero)
+    {
+        if(raiz==null)
+        {
+            return false;
+        }
+        else
+        {
+            NodoBinario nodoEliminar;
+            if(raiz.getCuenta().getCodigoNumerico()==numero)
+            {
+                nodoEliminar=raiz;
+                if(raiz.tieneHijoIzquierdo())
+                {
+                    raiz=raiz.getHijoIzquierdo();
+                }
+                else if(raiz.tieneHijoDerecho())
+                {
+                    raiz=raiz.getHijoDerecho();
+                }
+                else
+                {
+                    raiz=null;
+                    return true;
+                }
+            }
+            else
+            {
+                nodoEliminar = obtenerCuenta(raiz,numero,true);
+            }
+
+            if(nodoEliminar!=null)
+            {
+                concatenarArbol(nodoEliminar.getHijoIzquierdo());
+                concatenarArbol(nodoEliminar.getHijoDerecho());
+            }
+            return nodoEliminar!=null;
+        }
+        
+
+    }
+    
     private boolean nodoEliminado = false;
     private NodoBinario obtenerCuenta(NodoBinario r, int numero, boolean borrarReferencia ) {
         NodoBinario retorno = null;

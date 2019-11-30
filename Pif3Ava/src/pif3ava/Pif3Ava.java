@@ -25,30 +25,43 @@ public class Pif3Ava {
         banco.agregar("Mónica", "Osorio", 895, 2, 900, "mosorio@gmail.com", 1);
         banco.agregar("Carlina", "de Villegas", 61, 2, 9, "cdevillegas@gmail.com", 1);        
         
+        
         // Sumatoria = 1.280.000. Promedio = 320.000
         banco.agregar("José", "Betancur", 803, 1, 0, "jbetancur@gmail.com", 2);
         banco.agregar("Carlos", "Córdoba", 144, 1, 980000, "ccordoba@gmail.com", 2);
         banco.agregar("Liliana", "Ceballos", 331, 2, 0, "lceballos@gmail.com", 2);
+        
         
         banco.agregar("Santiago", "Espinosa", 177, 2, 300000, "sespinosa@gmail.com", 2);
         
         
         //PUNTO 1: Imprimir información de cuentas bancarias
         System.out.println("------- Listado de cuentas ------------");
+        banco.print();        
+        System.out.println("---------------------------------------");
+        System.out.println("");
+        
+        
+         System.out.println("------- Realizar consignación de $20.000 a la cuenta 593 ------------");
+        System.out.println(banco.consignarDinero(593, 20000));
         banco.print();
-        
         System.out.println("---------------------------------------");
         System.out.println("");
         
         
-        System.out.println("-------- Creando duplicados ------------");
-        System.out.println("La cuenta 302 " + (banco.agregar("Maria", "Rodriguez", 302, 1, 0, "mrodriguez@gmail.com", 1) ? "" : "no") +" fue creada.");
-        System.out.println("La cuenta 188 " + (banco.agregar("Maria", "Rodriguez", 188, 1, 0, "mrodriguez@gmail.com", 1) ? "" : "no") +" fue creada.");
-        
-        
+        System.out.println("------- Realizar retiro de $900.000 a la cuenta 803 ------------");
+        System.out.println(banco.retirarDinero(803, 900000));
         System.out.println("---------------------------------------");
         System.out.println("");
         
+        
+        System.out.println("------- Realizar retiro de $1000 a la cuenta 593 ------------");
+        System.out.println(banco.retirarDinero(593, 1000));
+        banco.print();
+        System.out.println("---------------------------------------");
+        System.out.println("");
+        
+
         
         //PUNTO 2.b: Retornar el valor total de dinero almacenado en el banco 
         System.out.println();
@@ -58,7 +71,34 @@ public class Pif3Ava {
         
         System.out.println("---------------------------------------");
         System.out.println("");
-        //Punto 2.d. Defina un método que retorne el saldo promedio de las cuentas de ahorros.
+        
+        
+        //PUNTO 2.c: Eliminar cuenta 
+        System.out.println();
+        System.out.println("PUNTO 2.c: Eliminar cuenta");
+        System.out.print("El árbol antes de eliminar era:");
+        System.out.println();
+        System.out.println();
+        banco.mostrarArbol();
+        System.out.println();
+        System.out.print("Al eliminar 188, el árbol queda así:");
+        System.out.println();
+        System.out.println();
+        banco.eliminarCuenta(593);
+        banco.mostrarArbol();
+        
+        System.out.println("---------------------------------------");
+        System.out.println("");
+        
+        System.out.println("-------- Creando duplicados ------------");
+        System.out.println("La cuenta 302 " + (banco.agregar("Maria", "Rodriguez", 302, 1, 0, "mrodriguez@gmail.com", 1) ? "" : "no") +" fue creada.");
+        System.out.println("La cuenta 188 " + (banco.agregar("Maria", "Rodriguez", 188, 1, 0, "mrodriguez@gmail.com", 1) ? "" : "no") +" fue creada.");
+        
+
+        System.out.println("---------------------------------------");
+        System.out.println("");
+        
+//Punto 2.d. Defina un método que retorne el saldo promedio de las cuentas de ahorros.
         
         System.out.println("");
         System.out.println("Punto 2.d: Saldo promedio cuentas de ahorro");
@@ -66,6 +106,8 @@ public class Pif3Ava {
         System.out.println(banco.promedioCuentasAhorro());
         System.out.println("");
         
+        System.out.println("---------------------------------------");
+        System.out.println("");
         
        
         System.out.println("---------------------------------------");
@@ -107,7 +149,6 @@ public class Pif3Ava {
         System.out.println(banco.existeCuenta(111) ? "La cuenta 111 existe" : "La cuenta 111 no existe");
         System.out.println(banco.existeCuenta(188) ? "La cuenta 188 existe" : "La cuenta 188 no existe");
         System.out.println("");
-        
     }
     
 }
