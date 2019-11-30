@@ -43,7 +43,10 @@ public class NodoBinario {
         this.cuenta = cuenta;
     }
     
-    
+    @Override
+    public String toString() {
+        return cuenta.toString();
+    }
     
     public boolean esHoja(){
         return hijoIzquierdo==null && hijoDerecho==null;

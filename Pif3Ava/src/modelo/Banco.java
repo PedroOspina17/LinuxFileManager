@@ -137,11 +137,11 @@ public class Banco {
             else 
                 retorno = null;
                        
-            if(retorno != null)
+            if(retorno == null)
             {
                 retorno = buscarCadena(r.getHijoIzquierdo(), cadena);
             }
-            if(retorno != null)
+            if(retorno == null)
             {
                 retorno = buscarCadena(r.getHijoDerecho(), cadena);
             }

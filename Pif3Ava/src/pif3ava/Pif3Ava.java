@@ -33,9 +33,14 @@ public class Pif3Ava {
         
         
         //PUNTO 1: Imprimir información de cuentas bancarias
+        System.out.println("------- Listado de cuentas ------------");
         banco.print();
         
-        System.out.println("Creando duplicados");
+        System.out.println("---------------------------------------");
+        System.out.println("");
+        
+        
+        System.out.println("-------- Creando duplicados ------------");
         if(banco.agregar("Maria", "Rodriguez", 302, 1, 0, "mrodriguez@gmail.com", 1))
         {
             System.out.println("Cuenta creada.");
@@ -44,7 +49,8 @@ public class Pif3Ava {
         {
             System.out.println("La cuenta no fue agregada, el identificador de la cuenta ya se encuentra creado.");
         }
-        
+        System.out.println("---------------------------------------");
+        System.out.println("");
         
         
         //PUNTO 2.b: Retornar el valor total de dinero almacenado en el banco 
@@ -53,6 +59,8 @@ public class Pif3Ava {
         System.out.print(banco.retornarTotal());
         System.out.println();
         
+        System.out.println("---------------------------------------");
+        System.out.println("");
         //Punto 2.d. Defina un método que retorne el saldo promedio de las cuentas de ahorros.
         
         System.out.println("");
@@ -62,7 +70,8 @@ public class Pif3Ava {
         
         
        
-        
+        System.out.println("---------------------------------------");
+        System.out.println("");
         //Punto 2e. Defina un método que retorne en una lista todas la cuentas corrientes.
         System.out.println("");
         System.out.println("Punto 2.e: Listado cuentas corrientes");
@@ -72,7 +81,8 @@ public class Pif3Ava {
         //Punto 2f. Defina un método que reciba una cadena de búsqueda y retorne el primer nodo que contenga esa cadena en nombre, mail o dirección. 
         //          En caso de no encontrar ningún nodo con esa condición, debe retornar null.
         
-        
+        System.out.println("---------------------------------------");
+        System.out.println("");
         System.out.println("");
         System.out.println("Punto 2.f: Buscar cadena");
         System.out.println(banco.buscarCadena("Vill").toString());
@@ -82,7 +92,8 @@ public class Pif3Ava {
 
         //Punto 2g. Defina un método que retorne el saldo promedio de las mujeres en las cuentas de ahorros.
        
-        
+        System.out.println("---------------------------------------");
+        System.out.println("");
         System.out.println("");
         System.out.println("Punto 2.g: SAldo promedio cuentas de ahorro de mujeres");
         System.out.println(banco.promedioMujeresCuentaAhorro());
@@ -91,7 +102,8 @@ public class Pif3Ava {
         
         //Punto 2h. Defina un método que reciba un código y retorne true si el código existe en el ABB o falso en caso contrario.  
         
-        
+        System.out.println("---------------------------------------");
+        System.out.println("");
         System.out.println("");
         System.out.println("Punto 2.h: Consultar cuenta");
         System.out.println(banco.existeCuenta(111) ? "La cuenta 111 existe" : "La cuenta 111 no existe");
