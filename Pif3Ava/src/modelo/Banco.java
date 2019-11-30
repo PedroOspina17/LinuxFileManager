@@ -193,26 +193,24 @@ public class Banco {
     
     // Punto 2 - h
     public boolean existeCuenta(int numero) {
-        return existeCuenta(raiz, numero);
+        return obtenerCuenta(raiz, numero) != null;
         
     }
-    private boolean existeCuenta(NodoBinario r, int numero) {
-        boolean retorno = false;
+    private NodoBinario obtenerCuenta(NodoBinario r, int numero) {
+        NodoBinario retorno = null;
         if (r != null) {
             
             CuentaBancaria cuenta = r.getCuenta();
             if(r.getCuenta().getCodigoNumerico() == numero)        
-                retorno = true;            
-            else 
-                retorno = false;
+                retorno = r;
                        
-            if(!retorno)
+            if(retorno != null)
             {
-                retorno = existeCuenta(r.getHijoIzquierdo(), numero);
+                retorno = obtenerCuenta(r.getHijoIzquierdo(), numero);
             }
-            if(!retorno)
+            if(retorno != null)
             {
-                retorno = existeCuenta(r.getHijoDerecho(), numero);
+                retorno = obtenerCuenta(r.getHijoDerecho(), numero);
             }
             
 
